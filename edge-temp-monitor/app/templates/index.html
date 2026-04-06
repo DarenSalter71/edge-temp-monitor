@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pi CPU Temperature</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta http-equiv="refresh" content="60">
+</head>
+<body>
+  <h1>Raspberry Pi CPU Temperature</h1>
+  <p>Points loaded : {{ temps|length }}</p>
+  <canvas id="tempChart" width="900" height="400"></canvas>
+
+  <script>
+    const labels = {{ labels|tojson }};
+    const temps = {{ temps|tojson }};
+
+    new Chart(document.getElementById('tempChart'), {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'CPU Temp °C',
+          data: temps,
+          tension: 0.2
+        }]
+      },
+      options: {
+        responsive: false,
+        scales: {
+          y: {
+            beginAtZero: false
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
