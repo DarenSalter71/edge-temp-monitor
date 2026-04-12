@@ -8,12 +8,15 @@
 </head>
 <body>
   <h1>Raspberry Pi CPU Temperature</h1>
-  <p>Points loaded : {{ temps|length }}</p>
+  <p>Records loaded : {{ temps|length }}</p>
   <canvas id="tempChart" width="900" height="400"></canvas>
 
   <script>
     const labels = {{ labels|tojson }};
     const temps = {{ temps|tojson }};
+    const piIds = {{ pi_ids|tojson }};
+    const fanStates = {{ fan_states|tojson }};
+    const topProcesses = {{ top_processes|tojson }};
 
     new Chart(document.getElementById('tempChart'), {
       type: 'line',
@@ -22,12 +25,30 @@
         datasets: [{
           label: 'CPU Temp °C',
           data: temps,
-          tension: 0.2
+          tension: 0.2,
+          pointRadius:3
         }]
       },
-      options: {
+        options: {
         responsive: false,
-        scales: {
+        plugins: {
+          tooltip: {
+             callbacks: {
+                label: function(context) {
+                   const index = context.dataIndex;
+
+                   return [
+                      `Time: ${labels[index]}`,
+                      `Temp: ${temps[index]}°C`,
+                      `Pi: ${piIds[index]}`,
+                      `Fan: ${fanStates[index]}`,
+                      `Process: ${topProcesses[index]}`
+                      ];
+                    }
+                   }
+                  }
+                 },
+                 scales: {
           y: {
             beginAtZero: false
           }
