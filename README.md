@@ -102,4 +102,4 @@ text edge-temp-monitor/ ├── scripts/ │   └── pi-temp-monitor.sh �
 
 Daren Salter
 
-GitHub: DarenSalter7
+GitHub: DarenSalter71
