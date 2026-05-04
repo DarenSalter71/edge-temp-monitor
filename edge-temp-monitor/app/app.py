@@ -1,7 +1,21 @@
 from flask import Flask, render_template
 from datetime import datetime
+from pathlib import Path
+
 import os
+
 app = Flask(__name__)
+
+
+#--- Reslve Base Directory
+#BASE_DIR=Path(__file__).resolve().parent.parent
+#DATA_DIR = Path(os.getenv("DATA_DIR", BASE_DIR / "data"))
+#DB_PATH = Path(os.getenv("DB_PATH", BASE_DIR / "data" / "temperature.db"))
+
+#print("BASE_DIR : ",BASE_DIR)
+#print("DATA_DIR : ",DATA_DIR)
+#print("DB_PATH : ",DB_PATH)
+
 
 #1. Get base folder where this file lives
 base_dir = os.path.dirname(os.path.abspath(__file__))
